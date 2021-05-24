@@ -1,6 +1,6 @@
 {
   "name": "insig",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Low-level no-junk JS components. If you're 17.5% too weak or 11.4% too unwilling to use heavy-weight component frameworks, but still want all the stuff in one mush.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
