@@ -2,7 +2,7 @@
 
 ![insig logo](insig-logo.svg "insig logo")
 
-Low-level no-junk JS components. If you're 17.5% too weak or 11.4% too unwilling to use heavy-weight component frameworks, but still want all the stuff in one mush:
+No-junk JS component library with insignificant weight. If you're 17.5% too weak or 11.4% too unwilling to use heavy-weight component frameworks, but still want all the stuff in one mush:
 
 - Web-Components
 - Localization
@@ -31,7 +31,7 @@ Handmade master craftsmanship gives you the full-bodied low-fat experience you e
 
 ## REQUIREMENTS
 
-Because **insig** is so bare bones, your customer's browser almost needs to be from the JavaScript-future:
+Because `insig` is so bare bones, your customer's browser almost needs to be from the JavaScript-future:
 
 - modules & imports
 - template literals
@@ -44,13 +44,15 @@ Yes: That's all the browsers, since a couple of years.
 
 Running in an up-to-date browsers your SPA doesn't need all the vanity junk. Just use a server that doesn't crack on HTML/2 push and gzipped response compression.
 
-Real quickility comes with not doing stuff. And thats what **insig** does: not doing stuff. If you want wing chair comfort and a nurse giving you a hand, don't use **insig**. If you know your JavaScript, get cracking.
+Real quickility comes with not doing stuff. And thats what `insig` does: not doing stuff. If you want wing chair comfort and a nurse giving you a hand, don't use `insig`. If you know your JavaScript, get cracking.
 
 ## FRIENDLY TO CARBONS OUT OF THE BOX
 
-`lowly` is hertz-saving for computers. So somewhere someone doesn't need to burn fatty non-renewables. But keep in mind: what you do is up to you: Run your stuff on a Windows-11-VM through 5 VPNs and 6 SSH-tunnels if you like to roll like a coaler.
+`insig` is hertz-saving for computers. So somewhere someone doesn't need to burn fatty non-renewables. But keep in mind: what you do is up to you: Run your stuff on a Windows-11-VM through 5 VPNs and 6 SSH-tunnels if you like to roll like a coaler.
 
 # Docs
+
+`insig` happened while writing an SPA in vanilla JavaScript in a reactive, event-driven design by factoring out the accidental complexity.
 
 ## Component Example
 
@@ -215,22 +217,22 @@ export default Comp('ft-app', {
 });
 ```
 
-- An **insig** component is defined by using the 4 init functions: `Comp`, `Fragment`, `Const`, `Let`. All except `Comp` take an init-function which is lazily evaluated. 
+- An `insig` component is defined by using the 4 init functions: `Comp`, `Fragment`, `Const`, `Let`. All except `Comp` take an init-function which is lazily evaluated. 
 - Every comp has one fragment property. It's init function returns a string containing HTML; one or an array of `Element` (`document.createElement(...)`) respectively. 
 - Use JavaScrip's string template literals as a template engine. The returned HTMl doesn't need to have one root element. 
 - Use `Comp` with 2 args to create and register a web-component. Use it with one to create function-components. 
-- The `new` keyword is redundant in JavaScript and not used within **insig**.
+- The `new` keyword is redundant in JavaScript and not used within `insig`.
 - Use `Const(...)` to define constants and `Let(...)` to define variables. - Variables are always reactive and change-events are dispatched to the `ON: {...}` section of a comp. Every change-handler has the same name as the variable it reacts upon.
 
 ## Comps as state machines
 
-### How to program with **insig**
+### How to program with `insig`
 
-An **insig** comp is a state machine. Programming is done via variable changes over time. I.e. setting one variable through user-input, reacting to the change via a handler in `ON: {...}`, setting another variable and reacting to the change, and so on. If you need to have your comp in a busy-state while async operations / server round-trips are performed, express it via a variable and it's change over time.
+An `insig` comp is a state machine. Programming is done via variable changes over time. I.e. setting one variable through user-input, reacting to the change via a handler in `ON: {...}`, setting another variable and reacting to the change, and so on. If you need to have your comp in a busy-state while async operations / server round-trips are performed, express it via a variable and it's change over time.
 
 ## `self` instead of `this`
 
-The first argument in every function and init-functions in a comp is always `self`, the reference to the component instance. `this` cannot be used due to **insig** preferring arrow functions.
+The first argument in every function and init-functions in a comp is always `self`, the reference to the component instance. `this` cannot be used due to `insig` preferring arrow functions.
 
 ## Attrib- and prop-binding
 
@@ -238,7 +240,7 @@ The HTML returned by `Fragment` is augmented with the attribute and property bin
 
 ### comp-ref
 
-A const reference to the actual DOM element. Mainly used as slots for modifying child-elements by appending other **insig** comp fragments, i.e.:
+A const reference to the actual DOM element. Mainly used as slots for modifying child-elements by appending other `insig` comp fragments, i.e.:
 
 ```js
 // ...
@@ -261,7 +263,7 @@ Bind comp-functions to an event of the actual DOM element. String templates are 
 
 ### Event- and variable-chang-handlers
 
-Handler-functions are defined in the `ON` object. They take 3 arguments in this order: `self`, `newValue`, `oldValue`. Setting other variables in an event handler is encouraged, as this is how you control the state machine that is an **insig** comp.
+Handler-functions are defined in the `ON` object. They take 3 arguments in this order: `self`, `newValue`, `oldValue`. Setting other variables in an event handler is encouraged, as this is how you control the state machine that is an `insig` comp.
 
 ### Binding-syntax
 
@@ -321,7 +323,7 @@ The localization key to use to retrieve the value from the translations file. Fa
 
 ## Localization/i18n setup
 
-**insig** must rely on script loading order to make translations available ASAP during page-loading. Translations file and LCZ-module must be setup as follows:
+`insig` must rely on script loading order to make translations available ASAP during page-loading. Translations file and LCZ-module must be setup as follows:
 
 ```html
 <!doctype html>

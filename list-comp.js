@@ -6,9 +6,8 @@ import {
     INIT_ON,
     INIT_LET
 } from './comp.js';
-// import ObsList from '../lowly/obs-list.js';
 
-const invalidInitError = 'ListComp() must be called with a combination of <tagName:string, pubVars:object, ChildComp:function>. <tagName:string, pubVars:object> con be omitted. <tagName:string> defaults to "div".';
+const invalidInitError = 'ListComp() must be called with a combination of <tagName:string, pubVars:object, ChildComp:function>. <tagName:string, pubVars:object> can be omitted. <tagName:string> defaults to "div".';
 const singleRootCompError = 'Child components must be single-root for use in ListComp';
 const incompatibleCompError = 'Child component must be declared with Comp(...)';
 const reservedKeywordError = word => `"${word}" is a reserved keyword for ListComp`;

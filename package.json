@@ -1,7 +1,7 @@
 {
   "name": "insig",
-  "version": "1.0.1",
-  "description": "Low-level no-junk JS components. If you're 17.5% too weak or 11.4% too unwilling to use heavy-weight component frameworks, but still want all the stuff in one mush.",
+  "version": "1.0.3",
+  "description": "No-junk JS component library with insignificant weight. All in one mush: Web-Components, Localization, Templates, Routing, Reactive binding, Lazy init, Observables, Debounce, Unique IDs, PSW hashing",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
