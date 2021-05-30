@@ -1,4 +1,3 @@
-import TemplateRender from './template-render.js';
 import LCZ from './lcz.js';
 
 const initFrag = ({
@@ -93,48 +92,19 @@ const initBinds = (initOn, fragment, stateGet) => {
     }
 };
 
-/*
-Template-Syntax: 
-    comp-attr="id=fodderItem-{{id}}"
-             ="id=fodderItem-{{id}}"
-             ="innerHTML=Whatever there is <em>{{textA}}</em> {{textB}}"
-*/
-
 const registerBindings = (bindingsTemplate, initOn, setOnElem, isProp) => {
-    let reducer = (acc, comp) => {
-        acc.push(comp);
-        reducer = (acc, comp, idx, buff) => {
-            const prevIdx = idx - 1;
-            let prevComp = buff[prevIdx];
-            if (prevComp.endsWith('\\')) {
-                acc[prevIdx] = `${prevComp.slice(0, -1)} ${comp}`;
-            } else {
-                acc.push(comp);
-            }
-            return acc;
-        };
-        return acc;
-    };
-    const allBindings = bindingsTemplate.split(' ').reduce(
-        (acc, comp, idx, buff) => reducer(acc, comp, idx, buff), 
-        []
-    );
-    for (const binding of allBindings) {
-        registerOneBinding(binding, initOn, setOnElem, isProp);
-    }
+    const allBindingsStr = bindingsTemplate.split(' ').filter(b => b.length > 0);
+    const regs = allBindingsStr.map(bindingRegistration(setOnElem, isProp));
+    initOn(Object.fromEntries(regs));
 };
 
-const registerOneBinding = (binding, initOn, setOnElem, isProp) => {
+const bindingRegistration = (setOnElem, isProp) => binding => {
     const equalsIdx = binding.indexOf('=');
     const containsEqual = equalsIdx > -1;
-    if (!isProp && !containsEqual) throw new Error(`No "=" found in binding "${binding}"`);
+    if (!isProp && !containsEqual) throw new Error(`No "=" found in attr-binding "${binding}"`);
     const nameToSet = containsEqual ? binding.slice(0, equalsIdx).trim() : 'textContent';
     const subject = binding.slice(equalsIdx + 1).trim();
-    const render = TemplateRender(subject);
-    const registry = render
-        ? render.names.map(vn => [vn, () => setOnElem(nameToSet, render)])
-        : [[subject, (_, value) => setOnElem(nameToSet, () => value)]];
-    initOn(Object.fromEntries(registry));
+    return [subject, (_, value) => setOnElem(nameToSet, () => value)];
 };
 
 
