@@ -1,6 +1,6 @@
 {
   "name": "insig",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "No-junk JS component library with insignificant weight. All in one mush: Web-Components, Localization, Templates, Routing, Reactive binding, Lazy init, Observables, Debounce, Unique IDs, PSW hashing",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
