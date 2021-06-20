@@ -38,6 +38,19 @@ const LCZ = () => getInstance();
 export default LCZ;
 
 const findCurrentLocalization = allTranslations => {
+    if (allTranslations instanceof Array) {
+        allTranslations = allTranslations.reduce((coll, oneTranslation) => {
+            return Object.entries(oneTranslation)
+                .reduce((acc, [loc, tls]) => {
+                    if (!!acc[loc]) {
+                        acc[loc] = Object.assign(acc[loc], tls);
+                    } else {
+                        acc[loc] = tls;
+                    }
+                    return acc;
+                }, coll);
+        }, {});
+    }
     const availLocs = Object.keys(allTranslations);
     const locale = navigator.languages.find(l => availLocs.includes(l));
     return locale ? allTranslations[locale] : {};

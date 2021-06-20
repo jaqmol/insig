@@ -342,7 +342,7 @@ The localization key to use to retrieve the value from the translations file. Fa
 </html>
 ```
 
-The translations file must set a JS object onto the property `localizations` of the window object.
+The localizations file must set a the property `localizations` on the window object. If you only need one central localizations file, use the simple object notation in which each language locale is a key, i.e. `de` for german or `"de-CH"` for swiss german:
 
 ```js
 window.localizations = {
@@ -356,4 +356,18 @@ window.localizations = {
 };
 ```
 
-Each language is provided via a locale key, i.e. `de` for german or `"de-CH"` for swiss german.
+If you want to use several localization files, use the array notation in which each entry is one of the above. Use the following terse notation per file to automatically extend a previously loaded definition:
+
+```js
+window.localizations = (l => [...l, {
+    de: {
+        DOGS: 'Hunde',
+        CATS: 'Katzen',
+        DOG: 'Hund',
+        CAT: 'Katze',
+        DONE: 'Fertig'
+    }
+}])(window.localizations || []);
+```
+
+The actual translations objects are merged in this case. The order in which the files are loaded in the HTML is significant: Files loaded later overwrite translation-keys from a file loaded earlier, so you can extend on base localizations.
