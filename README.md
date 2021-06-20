@@ -269,7 +269,7 @@ Handler-functions are defined in the `ON` object. They take 3 arguments in this 
 
 Binding-syntax for `comp-prop` and `comp-attr` is the same, so all the following examples work for both:
 
-`<attrib-or-prop-name>=<variable-name-or-string-template>`
+`<attrib-or-prop-name>=<variable-name>`
 
 Multiple binding must be separated by one space character as in `min=minValue max=maxValue value=_rangeValue`.
 
@@ -277,20 +277,20 @@ Multiple binding must be separated by one space character as in `min=minValue ma
 
 The name of the HTML element attribute or property to bind to.
 
-**<variable-name-or-string-template>**
+**<variable-name>**
 
-The name of the variable defined on `self` to bind to. Or a template string in which variable names defined on `self` are surrounded by double curly braces as in `id=foodAmountValue_{{id}}`. Space characters must be escaped as in `class=nav-link\\ {{petActive}}`.
+The name of the variable defined on `self` to bind to.
 
 #### Example
 
 ```html
-<label comp-attr="for=foodAmountValue_{{id}}" 
+<label comp-attr="for=_foodAmountValueID" 
     class="form-label lead"
     comp-prop="label">No food label</label>
 <div class="btn-group mb-3" role="group">
     <div class="input-group mb-2">
         <input type="text" 
-            comp-attr="id=foodAmountValue_{{id}}"
+            comp-attr="id=_foodAmountValueID"
             class="form-control" 
             aria-label="AMOUNT FOOD" 
             comp-prop="value=_inputValue"
@@ -302,7 +302,7 @@ The name of the variable defined on `self` to bind to. Or a template string in w
 
 <input type="range" 
     class="form-range" 
-    comp-attr="id=foodAmountRange_{{id}}"
+    comp-attr="id=_foodAmountRangeID"
     comp-prop="min=minValue max=maxValue value=_rangeValue"
     comp-on="input=onRangeChange">
 ```
