@@ -228,7 +228,37 @@ export default Comp('ft-app', {
 
 ### How to program with `insig`
 
-An `insig` comp is a state machine. Programming is done via variable changes over time. I.e. setting one variable through user-input, reacting to the change via a handler in `ON: {...}`, setting another variable and reacting to the change, and so on. If you need to have your comp in a busy-state while async operations / server round-trips are performed, express it via a variable and it's change over time.
+An `insig` comp is a state machine. Programming is done via variable changes over time. I.e. setting one variable through user-input, reacting to the change via a handler in `ON: {...}`, setting another variable and reacting to the change, until one change is reflected in HTML via a binding or triggers an outside variable-change-handler. 
+
+### Outside variable-change-handler example
+
+The following example shows how `insig` components are reused and how functions as well as variable-change-handler can be attached to a component instance during instantiation.
+
+```js
+    // ...
+    _emailInput: Const(self => InputComp({
+        // Callback functions need to be defined with Let(...) in the component.
+        // I.e.: validateFn: Let(() => () => {})
+        validateFn: (email) => {
+            // Callback-functions are not managed by `insig`, so `self` is not provided
+            const result = validateEmail(email);
+            if (!result[0]) return result;
+            self._validateSignUp();
+            return result;
+        },
+        ON: {
+            isValid: (_, emailIsValid) => {
+                self._emailIsValid = emailIsValid;
+            },
+            value: (_, email) => {
+                self._email = email;
+            }
+        }
+    })),
+    // ...
+```
+
+If you use an `insig` component as a web-component, the HTML-element (retrievable via `comp-ref`) will have a property `comp` which references the JS component.
 
 ## `self` instead of `this`
 
@@ -261,9 +291,22 @@ Bind comp-variables (`Let`) to the property of the actual DOM element. String te
 
 Bind comp-functions to an event of the actual DOM element. String templates are NOT supported. Function name must be provided without braces. See example below.
 
-### Event- and variable-chang-handlers
+### HTML event-handlers
 
-Handler-functions are defined in the `ON` object. They take 3 arguments in this order: `self`, `newValue`, `oldValue`. Setting other variables in an event handler is encouraged, as this is how you control the state machine that is an `insig` comp.
+HTML event-handlers bound via attribute `comp-on="change=onInputChange"` are defined as functions:
+
+```js
+// ...
+onInputChange: (self, event) => {
+    event.preventDefault();
+    self._inputValue = event.target.value;
+},
+// ...
+```
+
+### Reactive variable-change-handlers
+
+Variable-change-handler functions are defined in the `ON` object. They take 3 arguments in this order: `self`, `newValue`, `oldValue`. Setting other variables in an event handler is encouraged, as this is how you control the state machine that is an `insig` comp. See the above **How to program with `insig`** for more.
 
 ### Binding-syntax
 
