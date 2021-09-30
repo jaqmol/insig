@@ -2,8 +2,9 @@
   "name": "insig",
   "version": "1.0.5",
   "description": "No-junk JS component library with insignificant weight. All in one mush: Web-Components, Localization, Templates, Routing, Reactive binding, Lazy init, Observables, Debounce, Unique IDs, PSW hashing",
+  "main": "turbo",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "http-server ./"
   },
   "repository": {
     "type": "git",
@@ -23,5 +24,8 @@
   "bugs": {
     "url": "https://github.com/jaqmol/insig/issues"
   },
-  "homepage": "https://github.com/jaqmol/insig#readme"
+  "homepage": "https://github.com/jaqmol/insig#readme",
+  "devDependencies": {
+    "http-server": "^13.0.2"
+  }
 }
